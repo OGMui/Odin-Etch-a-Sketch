@@ -1,14 +1,23 @@
 const gridSizeBtn = document.getElementById("grid-size-button");
+const resetBtn = document.getElementById("reset-button");
+const rainbowBtn = document.getElementById("rainbow-button")
 const gridContainer = document.getElementById("grid-container");
 const cells = document.getElementsByClassName("cell");
-
+let rainbowColor = false;
 
 createGrid(16);
 
 gridSizeBtn.addEventListener("click", getGridSize);
+resetBtn.addEventListener("click", ResetColor)
+rainbowBtn.addEventListener("click", () => {
+    rainbowColor = !rainbowColor
+    console.log(rainbowColor)
+    rainbowBtn.style.backgroundColor = rainbowColor ? "green" : "red";
+} )
 
 function ResetColor () {
-    
+    const cellsArray = Array.from(cells);
+    cellsArray.forEach(cell => target.backgroundColor = "white")
 }
 
 function colorCells () {
@@ -30,10 +39,12 @@ cellsArray.forEach(cell => {
         const rgbValues = currentColor.match(/\d+/g);
         console.log(rgbValues);
         console.log(currentColor.slice(-2, -1));
-        color = `rgb(${rgbValues[0]}, ${rgbValues[1]}, ${rgbValues[2]})`;
+        rainbowColor === false 
+        ? color = `rgb(${rgbValues[0]}, ${rgbValues[1]}, ${rgbValues[2]})`
+        : color = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`
 
 
-        cell.style.backgroundColor = "rgb(0, 0, 0)"; 
+        cell.style.backgroundColor = color; 
 
         let currentOpacity = parseFloat(cell.style.opacity) || 0;
         currentOpacity += 0.1;
