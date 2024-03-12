@@ -19,16 +19,37 @@ cellsArray.forEach(cell => {
     
     cell.addEventListener("mouseenter", changeCell  = (event) => {
         console.log("change cell function was called", event);
-        let cellColor = `rgba(0, 0, 0, ${cellOpacity/10})`; 
+        const cell = event.target;
+        console.log(cell.backgroundColor);
+        let currentColor = cell.style.backgroundColor || "rgb(0, 0, 0)";
+        console.log(cell.backgroundColor);
 
-        event.target.style.backgroundColor = cellColor;
-        let cellOpacity = event.target.style.backgroundColor.slice();
-        console.log(cellOpacity)
-        if (cellOpacity < 10){
-            cellOpacity += 1;}
+        console.log(currentColor);
+        currentColor = currentColor.replace(/\s/g, '');
+        console.log(currentColor)
+        const rgbValues = currentColor.match(/\d+/g);
+        console.log(rgbValues);
+        console.log(currentColor.slice(-2, -1));
+        color = `rgb(${rgbValues[0]}, ${rgbValues[1]}, ${rgbValues[2]})`;
+
+
+        cell.style.backgroundColor = "rgb(0, 0, 0)"; 
+
+        let currentOpacity = parseFloat(cell.style.opacity) || 0;
+        currentOpacity += 0.1;
+        const newOpacity = currentOpacity;
+        cell.style.opacity = newOpacity;
+        
+        // let cellColor = `rgba(0, 0, 0, ${cellOpacity/10})`; 
+
+        // event.target.style.backgroundColor = cellColor;
+        // let cellOpacity = event.target.style.backgroundColor.slice();
+        // console.log(cellOpacity)
+        // if (cellOpacity < 10){
+        //     cellOpacity += 1;}
 
         
-        console.log(event.target.style.backgroundColor);
+        // console.log(event.target.style.backgroundColor);
     }   
 )})
 }
