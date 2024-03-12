@@ -17,7 +17,11 @@ rainbowBtn.addEventListener("click", () => {
 
 function ResetColor () {
     const cellsArray = Array.from(cells);
-    cellsArray.forEach(cell => target.backgroundColor = "white")
+    cellsArray.forEach(cell => {
+        cell.style.backgroundColor = "rgb(0, 0, 0)"
+        cell.style.opacity = 0;
+    })
+    colorCells();
 }
 
 function colorCells () {
